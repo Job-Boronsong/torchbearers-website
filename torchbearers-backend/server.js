@@ -18,8 +18,11 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch(err => console.error("❌ MongoDB connection error:", err));
 
 // Routes
-app.use('/api/contact', require('./routes/contact'));
-app.use('/api/admin', require('./routes/admin'));
+const contactRoutes = require('./routes/contact');
+const adminRoutes = require('./routes/admin');
+
+app.use('/api/contact', contactRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
