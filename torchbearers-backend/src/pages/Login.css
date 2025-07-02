@@ -1,39 +1,39 @@
 .login-form {
-    width: 300px;
-    margin: 100px auto;
-    padding: 2rem;
-    border: 1px solid #ddd;
+    max-width: 400px;
+    margin: 80px auto;
+    padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     background: #fff;
-    text-align: center;
   }
   
   .login-form h2 {
-    margin-bottom: 1rem;
-    color: #333;
+    margin-bottom: 20px;
   }
   
   .login-form input {
     width: 100%;
     padding: 10px;
-    margin: 0.5rem 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    margin-bottom: 10px;
   }
   
   .login-form button {
+    padding: 10px 20px;
     width: 100%;
-    padding: 10px;
-    margin-top: 1rem;
-    background-color: #4a00e0;
-    color: #fff;
+    background: #007bff;
+    color: white;
     border: none;
-    border-radius: 6px;
-    cursor: pointer;
+    border-radius: 4px;
   }
   
-  .login-form button:hover {
-    background-color: #7b2ff7;
+  .error {
+    color: red;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .spinner {
+    text-align: center;
+    margin: 10px 0;
   }
   

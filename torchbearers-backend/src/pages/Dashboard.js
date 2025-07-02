@@ -18,6 +18,7 @@ const Dashboard = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMessages(res.data);
+      setError('');
     } catch (err) {
       console.error('Error fetching messages:', err);
       setError('Failed to load messages.');
@@ -35,6 +36,7 @@ const Dashboard = () => {
       setMessages(messages.filter(msg => msg._id !== id));
     } catch (err) {
       console.error('Error deleting message:', err);
+      alert('Could not delete message.');
     }
   };
 
@@ -48,6 +50,7 @@ const Dashboard = () => {
       alert('Reply sent!');
     } catch (err) {
       console.error('Error sending reply:', err);
+      alert('Failed to send reply.');
     }
   };
 
@@ -66,23 +69,31 @@ const Dashboard = () => {
 
   return (
     <div className="admin-dashboard">
-      <h2>Admin Dashboard</h2>
-      <button onClick={logout}>Logout</button>
+      <div className="dashboard-header">
+        <h2>Admin Dashboard</h2>
+        <button onClick={logout} className="logout-btn">Logout</button>
+      </div>
 
-      {loading && <p>Loading messages...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {loading && <LoadingSpinner />}
+      {error && <p className="error">{error}</p>}
 
       {!loading && !error && (
-        <ul>
-          {messages.map(msg => (
-            <li key={msg._id}>
-              <p><strong>{msg.name}</strong> ({msg.email})</p>
-              <p>{msg.message}</p>
-              <button onClick={() => replyMessage(msg.email)}>Reply</button>
-              <button onClick={() => deleteMessage(msg._id)}>Delete</button>
-            </li>
-          ))}
-        </ul>
+        <div className="message-list">
+          {messages.length === 0 ? (
+            <p>No messages available.</p>
+          ) : (
+            messages.map(msg => (
+              <div key={msg._id} className="message-card">
+                <p><strong>{msg.name}</strong> (<em>{msg.email}</em>)</p>
+                <p>{msg.message}</p>
+                <div className="message-actions">
+                  <button onClick={() => replyMessage(msg.email)}>Reply</button>
+                  <button onClick={() => deleteMessage(msg._id)}>Delete</button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       )}
     </div>
   );
