@@ -1,30 +1,31 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Login.css'; // Make sure this file styles the form nicely
+import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
-const Login = ({ onLoginSuccess }) => {
+const Login = ({ setToken }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const login = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post('/api/admin/login', { email, password });
-      const token = res.data.token;
-      localStorage.setItem('adminToken', token);
-      setError('');
-      onLoginSuccess(token); // Pass token back to App.js
+      localStorage.setItem('adminToken', res.data.token);
+      setToken(res.data.token);
+      navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed');
     }
   };
 
   return (
-    <div className="login-container">
+    <div className="login-form">
       <h2>Admin Login</h2>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleLogin} className="login-form">
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <form onSubmit={login}>
         <input
           type="email"
           placeholder="Email"
