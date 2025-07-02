@@ -1,0 +1,40 @@
+.admin-dashboard {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 2rem;
+    background: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .admin-dashboard h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .admin-dashboard button {
+    padding: 8px 12px;
+    margin: 5px;
+    background-color: #4a00e0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .admin-dashboard button:hover {
+    background-color: #7b2ff7;
+  }
+  
+  .admin-dashboard ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .admin-dashboard li {
+    padding: 1rem;
+    background-color: #fff;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
