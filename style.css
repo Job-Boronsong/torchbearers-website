@@ -1,0 +1,1273 @@
+/* --- 1. CSS Reset & Base Styles --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #004d40; /* Dark Teal */
+  --secondary-color: #ff6f00; /* Bright Orange */
+  --background-light: #f9f9f9;
+  --text-dark: #333;
+  --text-light: #fff;
+  --gray-text: #666;
+  --border-color: #ddd;
+  --font-family: 'Poppins', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  line-height: 1.6;
+  color: var(--text-dark);
+  background-color: var(--background-light);
+  padding-top: 90px; /* Adjust based on your header's actual height */
+
+}
+
+.header-branding {
+  display: flex; /* Makes the container a flex container */
+  align-items: center; /* Vertically aligns items in the center */
+  /* You might want to add some gap or padding here */
+  gap: 15px; /* Adds space between the logo and the text */
+  /* or padding-right: 15px; on the logo itself */
+}
+
+.logo {
+  /* Ensure your logo has a defined size */
+  height: 50px; /* Example size, adjust as needed */
+  width: auto;
+}
+
+.site-title {
+  /* Style your text as needed */
+  font-size: 24px; /* Example font size */
+  color: #1a4d3a; /* Example color, match your design */
+  font-weight: bold;
+  white-space: nowrap; /* Prevents text from wrapping if it's long */
+}
+
+/* Accessibility: Focus styles */
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+  outline: 2px dashed var(--secondary-color);
+  outline-offset: 4px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* --- 2. Reusable Components --- */
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Added box-shadow to transition */
+  border: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: var(--secondary-color);
+  color: var(--text-light);
+}
+
+.btn-secondary {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+}
+
+/* Section Headings */
+.content-section {
+  padding: 6rem 0;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--primary-color);
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--gray-text);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+/* --- 3. Header & Navigation --- */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-light); /* Solid background from the start */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensure it stays on top */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Added transition for scrolled state */
+}
+
+/* Optional: styling for when the header is scrolled, currently solid */
+.main-header.scrolled {
+  background-color: var(--background-light); /* Or a slightly different shade */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.main-header .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+.main-header .logo i {
+  color: var(--secondary-color);
+  margin-right: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.main-nav {
+  /* Initially hidden for mobile, will be controlled by JS for responsiveness */
+  transition: transform 0.3s ease-in-out; /* For mobile menu slide-in/out */
+}
+
+.main-nav .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.main-nav .nav-links a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  padding: 0.25rem 0; /* Add padding for a better hover/active area */
+  position: relative; /* For the underline effect */
+}
+
+/* Specific adjustment for the donate button in the nav */
+.main-nav .nav-links .donate-btn {
+  padding: 0.8rem 1.5rem; /* Adjusted padding to ensure text fits well */
+  min-width: 120px; /* Ensure a minimum width */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+/* Style for active navigation link */
+.main-nav .nav-links a.active {
+  color: var(--secondary-color);
+}
+
+/* Optional: Underline effect for active/hover links */
+.main-nav .nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--secondary-color);
+  transition: width 0.3s ease;
+}
+
+.main-nav .nav-links a:hover::after,
+.main-nav .nav-links a.active::after {
+  width: 100%;
+}
+
+
+.main-nav .nav-links a:hover {
+  color: var(--secondary-color);
+}
+
+.hamburger-menu {
+  display: none; /* Hidden on desktop, shown on mobile via media query */
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  cursor: pointer;
+  z-index: 1001; /* Ensure it's above the mobile nav when open */
+}
+
+/* --- 4. Hero Section --- */
+.hero-section {
+  position: relative; /* For absolute positioning of background images */
+  min-height: calc(100vh - 70px); /* Adjust min-height to account for fixed header */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--text-light);
+  overflow: hidden; /* Hide overflowing images during transition */
+}
+
+.hero-background-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Ensures images don't overflow this container */
+}
+
+.hero-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the entire area */
+  opacity: 0; /* Start hidden */
+  transition: opacity 1.5s ease-in-out; /* Smooth fade transition */
+  filter: brightness(50%); /* Darken images for better text contrast */
+}
+
+.hero-bg-image.active {
+  opacity: 1; /* Show active image */
+}
+
+.hero-content {
+  position: relative; /* Ensures content is on top of the slider */
+  z-index: 2; /* Higher z-index than images */
+  max-width: 800px;
+  padding: 2rem;
+  /* Added text shadow for better readability over changing backgrounds */
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+/* --- About Us Section --- */
+.about-section {
+  padding: 6rem 0; /* Consistent section padding */
+  /* NEW: Slightly different background for the entire section */
+  background-color: #f0fafa; /* A very light, subtle teal/cyan background */
+  /* Or: background-color: var(--background-light); and make body a different shade */
+  position: relative; /* For potential future additions like subtle overlays */
+  overflow: hidden; /* Ensures any background effects don't spill */
+}
+
+/* Ensure the main title is centered and prominent */
+.about-section .section-title {
+  font-size: 2.8rem; /* Slightly larger for main section title */
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem; /* Space before content */
+  color: var(--primary-color);
+}
+
+.about-section .section-subtitle {
+  text-align: center;
+  font-size: 1.15rem; /* A bit larger */
+  color: var(--gray-text);
+  max-width: 800px; /* Wider subtitle */
+  margin: 0 auto 4rem; /* More space below subtitle before content */
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem; /* Space between the image and text content */
+
+  /* NEW: Give the content container a white background if the section background is different */
+  background-color: var(--text-light); /* White background for the content block */
+  padding: 3rem; /* Padding inside this content block */
+  border-radius: 15px; /* More rounded corners for a softer look */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Stronger shadow to lift it */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* For hover effect */
+}
+
+.about-content:hover {
+  transform: translateY(-5px); /* Lift slightly on hover */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
+}
+
+
+.about-image {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  border-radius: 10px; /* Keep image border radius */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Image shadow */
+  overflow: hidden;
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.about-text {
+  flex: 2;
+  max-width: 650px;
+}
+
+.about-text h2 { /* This is likely redundant if using .section-title */
+  font-size: 2.5rem; /* Main About heading within the text block, if separate from section-title */
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--gray-text);
+  margin-bottom: 1.5rem;
+}
+
+.about-text p:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Mission & Vision Section (Keep previous styles for individual cards) */
+/* This section should ideally be placed *after* .about-content in HTML structure */
+.mission-vision-section {
+  margin-top: 4rem; /* Space between .about-content and this block */
+  /* ... (Keep the styles we agreed on for mission/vision individual cards) ... */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .about-content {
+      padding: 2.5rem; /* Reduce padding on medium screens */
+      gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-section .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+  }
+  .about-section .section-subtitle {
+      font-size: 1rem;
+      margin-bottom: 3rem;
+  }
+
+  .about-content {
+      flex-direction: column;
+      gap: 2.5rem;
+      padding: 2rem; /* Further reduce padding */
+      border-radius: 10px; /* Adjust border radius */
+  }
+
+  .about-image,
+  .about-text {
+      min-width: unset;
+      max-width: 100%;
+      text-align: center;
+  }
+
+  .about-text h2 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+  }
+
+  .about-text p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section {
+      padding: 4rem 0;
+  }
+  .about-section .section-title {
+      font-size: 1.8rem;
+  }
+  .about-section .section-subtitle {
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+  }
+  .about-content {
+      gap: 2rem;
+      padding: 1.5rem;
+  }
+  .about-text h2 {
+      font-size: 1.6rem;
+  }
+  .about-text p {
+      font-size: 0.95rem;
+  }
+}
+
+/* Mission & Vision Section Styling (if part of About) */
+
+.mission-vision-section {
+  margin-top: 4rem; /* More space above this sub-section */
+  padding: 3rem; /* Generous internal padding */
+  background-color: var(--text-light); /* Using a light background for contrast with the main page */
+  border-radius: 10px;
+  border: 1px solid var(--border-color); /* A subtle border to define its edges */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Enhanced shadow for a lifted effect */
+  text-align: center; /* Center content within this box */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.mission-vision-section:hover {
+  transform: translateY(-5px); /* Lift slightly on hover */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
+}
+
+.mission-vision-section h3 {
+  font-size: 2rem; /* Clear heading for mission/vision */
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.mission-vision-section p {
+  font-size: 1.05rem; /* Slightly smaller text than main about text */
+  color: var(--gray-text);
+  max-width: 800px;
+  margin: 0 auto 1.5rem; /* Center and add bottom margin */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .mission-vision-section {
+      margin-top: 3rem;
+      padding: 2rem;
+  }
+
+  .about-image,
+  .about-text {
+      min-width: unset; /* Remove min-width when stacking */
+      max-width: 100%; /* Take full width */
+      text-align: center; /* Center text on mobile */
+  }
+
+  .about-text h2 {
+      font-size: 2rem; /* Adjust heading size */
+      text-align: center; /* Center heading on mobile */
+      margin-bottom: 1rem;
+  }
+
+  .about-text p {
+      font-size: 1rem; /* Adjust paragraph size */
+      margin-bottom: 1rem;
+  }
+
+  .mission-vision-section {
+      margin-top: 3rem;
+      padding: 2rem;
+  }
+
+  .mission-vision-section h3 {
+    font-size: 1.75rem;
+}
+}
+
+@media (max-width: 480px) {
+  .about-section {
+      padding: 4rem 0; /* Smaller padding on very small screens */
+  }
+
+  .about-content {
+      gap: 2rem;
+  }
+
+  .about-text h2 {
+      font-size: 1.8rem;
+  }
+
+  .about-text p {
+      font-size: 0.95rem;
+  }
+}
+
+
+/* --- 6. Projects Section --- */
+/* Project Grid Layout */
+.project-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 2rem;
+}
+
+/* Individual Project Card */
+.project-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Project Image */
+.project-card img {
+  width: 100%;
+  height: 180px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Project Heading */
+.project-card h3 {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  color: #333;
+}
+
+/* Project Description */
+.project-card p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+/* "Read More" Button */
+.read-more-btn {
+  display: inline-block;
+  margin-top: 0.8rem;
+  background-color: #b60e90;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.read-more-btn:hover {
+  background-color: #a00c7f;
+}
+
+/* Modal Styling */
+.project-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 80px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Modal Content */
+.project-modal .modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  animation: slideIn 0.3s ease;
+}
+
+/* Close Button */
+.project-modal .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #b60e90;
+}
+
+/* Modal Heading & Text */
+.project-modal h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.project-modal p {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Modal Slide-In Animation */
+@keyframes slideIn {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+/* --- Team Section --- */
+.team-section {
+  padding: 40px 0;
+  text-align: center;
+  background-color: var(--light-bg-color, #f9f9f9); /* Use your theme's light background */
+}
+
+.team-section h2 {
+  font-size: 2.5rem;
+  color: var(--heading-color, #333);
+  margin-bottom: 40px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch; /* Ensures cards have equal height */
+}
+
+.team-member-card {
+  background-color: var(--card-bg-color, #ffffff);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pushes social icons to bottom if needed */
+}
+
+.team-member-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.team-member-card img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 20px auto;
+  border: 4px solid var(--primary-color, #4CAF50); /* Accent border */
+}
+
+.team-member-card h3 {
+  font-size: 1.6rem;
+  color: var(--text-dark, #333);
+  margin-bottom: 5px;
+}
+
+.team-member-card p {
+  font-size: 1rem;
+  color: var(--text-medium, #666);
+  margin-bottom: 20px;
+}
+
+.team-member-card .social-icons a {
+  color: var(--primary-color, #4CAF50);
+  font-size: 1.5rem;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.team-member-card .social-icons a:hover {
+  color: var(--secondary-color, #ff6f61); /* Or a darker primary color */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .team-grid {
+      grid-template-columns: 1fr; /* Stack cards on small screens */
+  }
+}
+
+/* --- 9. Contact Form Section --- */
+.contact-section {
+  background-color: var(--background-light);
+}
+
+#contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--text-light);
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select { /* Added select */
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+#form-status {
+  margin-top: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.main-footer {
+  background-color: #1c1c1c;
+  color: #fff;
+  padding: 60px 20px 30px;
+  margin-top: 30px;
+}
+
+.footer-grid {
+  display: grid;
+  /* Set to two equal columns */
+  grid-template-columns: 1fr 1fr;
+  gap: 40px; /* Gap between the two main columns */
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+/* Styles for the new column wrappers */
+.footer-column-left,
+.footer-column-right {
+  display: flex; /* Use flexbox to stack content vertically */
+  flex-direction: column;
+  gap: 40px; /* Gap between sections within each column */
+}
+
+.footer-section h4 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.footer-section li i {
+  margin-right: 12px;
+  font-size: 18px;
+  color: #f59e0b;
+}
+
+/* Social Icons */
+.footer-social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.footer-social-icons a {
+  width: 44px;
+  height: 44px;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.footer-social-icons a:hover {
+  background-color: #f59e0b;
+  color: #1c1c1c;
+  border-color: #f59e0b;
+}
+
+/* Newsletter */
+.footer-section.newsletter {
+  margin-top: 70px;
+}
+
+.footer-section.newsletter form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-section.newsletter input[type="email"] {
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+}
+
+.footer-section.newsletter .btn-primary {
+  background-color: #f59e0b;
+  color: #1c1c1c;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.footer-map {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 6px;
+}
+
+/* Bottom Footer */
+.footer-bottom {
+  text-align: center;
+  font-size: 14px;
+  padding-top: 20px;
+  border-top: 1px solid #444;
+  color: #ccc;
+}
+
+
+/* --- 11. Modal Styles --- */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: flex-start; /* align to top, not center */
+  overflow-y: auto; /* allow scroll if too tall */
+  padding: 3rem 1rem; /* top/bottom padding */
+  z-index: 9999;
+}
+
+.modal.active {
+  display: flex;
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto; /* Make it clickable when visible */
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  margin: auto;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-content h2 {
+  color: var(--primary-color);
+  margin-bottom: 0.75rem; /* Reduced margin */
+}
+
+.modal-content p {
+  color: var(--gray-text);
+  margin-bottom: 1.25rem; /* Reduced margin */
+  font-size: 0.95rem; /* Slightly smaller font for paragraphs */
+}
+
+.donation-options {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem; /* Reduced gap */
+  margin-bottom: 1rem; /* Reduced margin */
+}
+
+.donation-amount-btn {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border: 2px solid transparent;
+  padding: 0.6rem 1.2rem; /* Reduced padding */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.95rem; /* Slightly smaller font */
+  font-weight: 600;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; /* Added color to transition */
+}
+
+.donation-amount-btn.active,
+.donation-amount-btn:hover {
+  background-color: var(--text-light);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+#custom-amount {
+  width: 100%;
+  padding: 0.7rem; /* Reduced padding */
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  margin-bottom: 1.25rem; /* Reduced margin */
+  text-align: center;
+}
+
+.donate-now-btn {
+  width: 100%;
+  padding: 0.9rem 1.8rem; /* Adjusted padding for prominence */
+}
+
+.donation-note {
+  font-size: 0.85rem; /* Slightly smaller font */
+  color: var(--gray-text);
+  margin-top: 0.75rem; /* Reduced margin */
+}
+
+/* New styles for payment options in modal */
+.modal-content .payment-method-selection {
+  text-align: left; /* Align radio buttons to the left */
+  margin-top: 1.5rem; /* Reduced margin */
+  margin-bottom: 1rem; /* Reduced margin */
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.modal-content .payment-method-selection div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.4rem; /* Reduced margin */
+}
+
+.modal-content .payment-method-selection input[type="radio"] {
+  width: auto; /* Override 100% width */
+  margin-right: 0.5rem;
+}
+
+.modal-content .payment-method-selection label {
+  margin-bottom: 0; /* Remove bottom margin for labels next to radio buttons */
+  font-size: 0.95rem; /* Slightly smaller font */
+}
+
+.payment-details {
+  margin-bottom: 1.25rem; /* Reduced margin */
+  padding: 0.8rem; /* Reduced padding */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--background-light);
+}
+
+.payment-details .form-group {
+  margin-bottom: 0.8rem; /* Smaller margin for groups within details */
+}
+
+.payment-details .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.payment-details .inline-fields {
+  display: flex;
+  gap: 0.75rem; /* Reduced gap */
+}
+
+.payment-details .inline-fields > div {
+  flex: 1;
+}
+
+/* Adjust input/select padding inside payment details */
+.payment-details .form-group input,
+.payment-details .form-group select {
+  padding: 0.6rem; /* Reduced padding for inputs */
+  font-size: 0.95rem; /* Slightly smaller font for inputs */
+}
+
+/* Adjust button padding slightly on mobile for better touch target */
+@media (max-width: 480px) {
+  .donation-amount-btn {
+      padding: 0.5rem 0.9rem; /* Further reduced padding for very small screens */
+      font-size: 0.85rem;
+  }
+  .donation-options {
+      flex-wrap: wrap; /* Allow buttons to wrap */
+  }
+}
+
+.modal,
+.project-modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.modal.show,
+.project-modal.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content,
+.project-modal .modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+  animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* --- 12. Media Queries for Responsiveness --- */
+@media (max-width: 1024px) {
+  .container {
+      padding: 0 1.5rem;
+  }
+  .hero-content h1 {
+      font-size: 3rem;
+  }
+  .main-nav .nav-links {
+      gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-header {
+      padding: 1rem;
+  }
+
+  .main-nav {
+      /* Not display: none anymore for transitions */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--primary-color);
+      z-index: 999;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform: translateX(100%); /* Start off-screen */
+      /* opacity and visibility for smooth fade + slide */
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none; /* Make unclickable when off-screen */
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .main-nav.active {
+      display: flex; /* Override default display property if needed, though flex should be set once */
+      transform: translateX(0); /* Slide in */
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto; /* Make clickable */
+  }
+
+  .main-nav .nav-links {
+      flex-direction: column;
+      gap: 2.5rem;
+  }
+
+  .main-nav .nav-links a {
+      font-size: 1.5rem;
+      color: var(--text-light);
+  }
+
+  /* Adjust specific donate button in mobile nav */
+  .main-nav .nav-links .donate-btn {
+      padding: 1rem 2rem; /* Larger padding for mobile touch target */
+      font-size: 1.25rem;
+      min-width: unset; /* Remove min-width for mobile */
+  }
+
+  .main-header .hamburger-menu {
+      display: block; /* Show hamburger icon */
+      z-index: 1001;
+  }
+
+  .hero-content h1 {
+      font-size: 2.5rem;
+  }
+
+  .about-content {
+      flex-direction: column;
+  }
+
+  .about-image {
+      max-width: 100%;
+  }
+
+  /* Assuming cta-section is present but wasn't in your HTML snippet */
+  .cta-section h2 {
+      font-size: 2.5rem;
+  }
+
+  .footer-content {
+      text-align: center;
+  }
+
+  .footer-content .social-links {
+      margin-top: 1rem;
+  }
+}
+
+/* blog */
+.project-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 2rem;
+}
+
+.blog-post {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 1rem;
+  text-align: left;
+}
+
+.blog-post img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  height: 180px;
+}
+
+.blog-post h3 {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.blog-post p {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 0.5rem 0 1rem;
+}
+
+.read-more {
+  color: #b60e90;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* sample projects */
+.project-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 2rem;
+}
+
+.project-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.project-content {
+  padding: 1rem;
+}
+
+.project-content h3 {
+  font-size: 1.2rem;
+  color: #222;
+  margin-bottom: 0.5rem;
+}
+
+.project-content p {
+  font-size: 0.95rem;
+  color: #555;
+}

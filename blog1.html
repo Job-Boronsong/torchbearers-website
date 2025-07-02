@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Empowering Rural Girls with Technology – Torchbearers Mission</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <header class="main-header">
+    <div class="header-branding">
+      <img src="Torretial.png" alt="Torchbearers Logo" class="logo">
+      <span class="site-title">Torchbearers Mission Incorporate</span>
+  </div>
+    <nav class="main-nav">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Back to Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container blog-detail">
+    <h1>Empowering Rural Girls with Technology</h1>
+    <img src="images/blog1.jpg" alt="Girls in Tech Workshop" />
+    <p>
+      In our recent <strong>Tech4Girls Workshop</strong> hosted in Yamfo, we brought together over 100 young girls from surrounding rural communities for an intensive 3-day training in digital literacy and coding. 
+      Each participant was guided through hands-on activities such as website creation, email setup, and introductory HTML & CSS lessons.
+    </p>
+    <p>
+      We partnered with local schools and volunteers to provide laptops, internet access, and mentorship. This program was designed to spark interest in STEM among girls and give them a platform to thrive.
+    </p>
+    <p>
+      Feedback from the attendees and community leaders was overwhelmingly positive, reinforcing our commitment to continue bridging the gender and digital divide in under-resourced areas.
+    </p>
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-grid container">
+  
+      <div class="footer-column-left">
+        <div class="footer-section">
+          <h4>Contact Info</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> GPS Address: GE-297-1848</li>
+            <li><i class="fas fa-envelope"></i> info@torchbearers.org</li>
+            <li><i class="fas fa-phone"></i> +233 24 123 4567</li>
+          </ul>
+        </div>
+  
+        <div class="footer-section">
+          <h4>Our Location</h4>
+          <iframe
+            class="footer-map"
+            src="https://www.google.com/maps?q=GE-297-1848,+Ghana&output=embed"
+            allowfullscreen=""
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+  
+      <div class="footer-column-right">
+        <div class="footer-section">
+          <h4>Find Us on Social Media</h4>
+          <div class="footer-social-icons">
+            <a href="https://web.facebook.com/boronsong.job" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/JobBoronsong" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/boronsong/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/boronsong-job/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+  
+        <div class="footer-section newsletter">
+          <h4>Stay Connected</h4>
+          <p>Subscribe to our newsletter for updates and impact stories.</p>
+          <form id="newsletter-subscribe-form">
+            <input type="email" id="newsletter-email" placeholder="Your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+            <div id="newsletter-status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+  
+    </div>
+  
+    <div class="footer-bottom">
+      © 2025 Torchbearers Mission Incorporate. All rights reserved.
+    </div>
+  </footer>
+
+  <div id="donation-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Donate to Our Cause</h2>
+      <p>Your generous contribution helps us continue our life‑changing work.</p>
+
+      <div class="donation-options">
+        <button class="donation-amount-btn" data-amount="25">₵25</button>
+        <button class="donation-amount-btn" data-amount="50">₵50</button>
+        <button class="donation-amount-btn" data-amount="100">₵100</button>
+      </div>
+
+      <input type="number" id="custom-amount" placeholder="Or enter custom amount (₵)">
+
+      <div class="form-group payment-method-selection">
+        <label>Choose Payment Method:</label>
+        <div><input type="radio" id="visa-card" name="payment-method" value="visa" checked> <label for="visa-card">Visa/MasterCard</label></div>
+        <div><input type="radio" id="mobile-money" name="payment-method" value="mobilemoney"> <label for="mobile-money">Mobile Money</label></div>
+      </div>
+
+      <div id="visa-details" class="payment-details">
+        <div class="form-group"><label for="card-number">Card Number</label><input type="text" id="card-number" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" pattern="\d{16}"></div>
+        <div class="form-group inline-fields">
+          <div><label for="expiry-date">Expiry (MM/YY)</label><input type="text" id="expiry-date" maxlength="5" placeholder="MM/YY" pattern="\d{2}/\d{2}"></div>
+          <div><label for="cvv">CVV</label><input type="text" id="cvv" maxlength="4" placeholder="123" pattern="\d{3,4}"></div>
+        </div>
+      </div>
+
+      <div id="mobile-money-details" class="payment-details">
+        <div class="form-group"><label for="mobile-network">Mobile Network</label><select id="mobile-network">
+            <option value="">Select Network</option>
+            <option value="mtn">MTN Mobile Money</option>
+            <option value="vodafone">Vodafone Cash</option>
+            <option value="airteltigo">AirtelTigo Money</option>
+        </select></div>
+        <div class="form-group"><label for="mobile-number">Mobile Money Number</label><input type="text" id="mobile-number" placeholder="+233 XXX XXX XXXX"></div>
+      </div>
+
+      <button class="btn btn-primary donate-now-btn">Proceed to Donation</button>
+      <p class="donation-note">You will be redirected to a secure payment gateway.</p>
+    </div>
+  </div>
+</body>
+</html>
