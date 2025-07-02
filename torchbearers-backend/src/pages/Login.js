@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Login.css';
+import LoadingSpinner from '../components/LoadingSpinner';
 
-const Login = ({ setToken }) => {
+const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const login = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await axios.post('/api/admin/login', { email, password });
       localStorage.setItem('adminToken', res.data.token);
-      setToken(res.data.token);
+      setError('');
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -40,7 +45,9 @@ const Login = ({ setToken }) => {
           onChange={(e) => setPassword(e.target.value)}
           required
         /><br />
-        <button type="submit">Login</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Logging in...' : 'Login'}
+        </button>
       </form>
     </div>
   );

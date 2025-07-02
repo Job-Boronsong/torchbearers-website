@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './Dashboard.css';
+import LoadingSpinner from '../components/LoadingSpinner';
 
-const Dashboard = ({ token, setToken }) => {
+const Dashboard = () => {
   const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const token = localStorage.getItem('adminToken');
 
   const fetchMessages = async () => {
     try {
+      setLoading(true);
       const res = await axios.get('/api/admin/messages', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMessages(res.data);
     } catch (err) {
       console.error('Error fetching messages:', err);
+      setError('Failed to load messages.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -44,29 +53,37 @@ const Dashboard = ({ token, setToken }) => {
 
   const logout = () => {
     localStorage.removeItem('adminToken');
-    setToken(null);
-    navigate('/login');
+    navigate('/');
   };
 
   useEffect(() => {
-    if (token) fetchMessages();
-    else navigate('/login');
+    if (token) {
+      fetchMessages();
+    } else {
+      navigate('/');
+    }
   }, [token]);
 
   return (
     <div className="admin-dashboard">
       <h2>Admin Dashboard</h2>
       <button onClick={logout}>Logout</button>
-      <ul>
-        {messages.map(msg => (
-          <li key={msg._id}>
-            <p><strong>{msg.name}</strong> ({msg.email})</p>
-            <p>{msg.message}</p>
-            <button onClick={() => replyMessage(msg.email)}>Reply</button>
-            <button onClick={() => deleteMessage(msg._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+
+      {loading && <p>Loading messages...</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+
+      {!loading && !error && (
+        <ul>
+          {messages.map(msg => (
+            <li key={msg._id}>
+              <p><strong>{msg.name}</strong> ({msg.email})</p>
+              <p>{msg.message}</p>
+              <button onClick={() => replyMessage(msg.email)}>Reply</button>
+              <button onClick={() => deleteMessage(msg._id)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
