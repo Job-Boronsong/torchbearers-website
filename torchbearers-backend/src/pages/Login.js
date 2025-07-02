@@ -1,43 +1,44 @@
-// src/pages/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Login.css';
+import './Login.css'; // Make sure this file styles the form nicely
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post('/api/admin/login', { email, password });
-      localStorage.setItem('token', res.data.token);
-      onLogin(); // Redirect to dashboard
+      const token = res.data.token;
+      localStorage.setItem('adminToken', token);
+      setError('');
+      onLoginSuccess(token); // Pass token back to App.js
     } catch (err) {
-      setError('Invalid credentials. Please try again.');
+      setError(err.response?.data?.error || 'Login failed');
     }
   };
 
   return (
     <div className="login-container">
       <h2>Admin Login</h2>
-      <form onSubmit={handleSubmit}>
+      {error && <p className="error">{error}</p>}
+      <form onSubmit={handleLogin} className="login-form">
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-        />
+        /><br />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-        />
-        {error && <p className="error">{error}</p>}
+        /><br />
         <button type="submit">Login</button>
       </form>
     </div>
